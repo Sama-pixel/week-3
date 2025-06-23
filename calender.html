@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A simple calender</title>
+   <style>
+    body{
+        font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+        
+    }
+    label{
+        font-weight: bold;
+    }
+    select{
+        padding: 5px 10px;
+        width: 120px;
+        cursor: pointer;
+        font-size: medium;
+    }
+    .calender-grid{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    li{
+      display: block;
+      width: 70px;
+      height: 40px;
+      background-color: rgb(172, 100, 239);
+      color: rgb(51, 2, 86);
+      justify-content: center;
+      text-align: center;
+      font-weight: bold;
+      font-size: x-large;
+      border: 2px solid whitesmoke;
+      border-radius: 5px;
+
+    }
+
+
+   </style>
+</head>
+<body>
+    <label for="month">Select a month: </label>
+    <select name="Months is:" id="month">
+        <option value="January">January</option>
+        <option value="February">February</option>
+        <option value="March">March</option>
+        <option value="April">April</option>
+        <option value="May">May</option>
+        <option value="June">June</option>
+        <option value="July">July</option>
+        <option value="August">August</option>
+        <option value="September">September</option>
+        <option value="October">October</option>
+        <option value="November">November</option>
+        <option value="December">December</option>
+    </select>
+
+    <h2 id="heading"></h2>
+    <ul id="calender" class="calender-grid"></ul>
+
+    <script>
+        const select = document.querySelector('select');
+        const heading = document.getElementById('heading');
+        const calender = document.getElementById('calender');
+        let days;
+
+        select.addEventListener('change', displayCalender);
+
+        function displayCalender(){
+            const choise = select.value;
+            
+
+            if (choise === 'January' || choise === 'March' || choise === 'May' || choise === 'July' || choise === 'August' || choise === 'October' || choise === 'Decemeber'){
+                days = 31;
+            } 
+            else if (choise === 'April' || choise === 'June' || choise === 'September' || choise === 'November'){
+                days = 30;
+            }
+            else if( choise === 'February'){
+                days = 28;
+            }
+
+            heading.textContent = choise;
+
+            calender.textContent = '';
+
+            for(let i = 1; i <= days; i++){
+                let listDay = document.createElement('li');
+                listDay.textContent = i;
+                calender.appendChild(listDay);
+            }
+
+
+        }
+    </script>
+</body>
+</html>

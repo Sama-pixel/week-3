@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Draw car</title>
+    <style>
+        canvas{
+            display: block;
+            margin: 15px auto;
+            border: 2px solid black;
+            
+        }
+        button{
+            width: 100px;
+            height: 30px;
+            display: block;
+            margin: 10px auto;
+
+        }
+    </style>
+</head>
+<body>
+    <h2>Draw car by JavaScript</h2>
+    <canvas id="myCanvas" width="800" height="400"></canvas>
+    <button type="button" id="start" >Start</button>
+    <button type="button" id="stop" >Stop</button>
+
+    <script>
+        const myCanvas = document.getElementById('myCanvas');
+        const ctx = myCanvas.getContext('2d');
+        const startBtn = document.getElementById('start');
+        const stopBtn = document.getElementById('stop');
+        
+        let x = 0;
+        let animationId = null;
+        function drawCar(x){
+            let y = 40;
+            ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
+
+            ctx.beginPath();
+            ctx.strokeStyle = 'black';
+            ctx.strokeRect(x,y,200,50);
+            //ctx.stroke();
+      
+            //then draw 3 lines
+            ctx.moveTo(x+15, y);
+            ctx.lineTo(x+30, y-25);
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+            ctx.moveTo(x+30, y-25)
+            ctx.lineTo(x+160, y-25)
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+            ctx.moveTo(x+160, y-25);
+            ctx.lineTo(x+175, y);
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+            ctx.closePath();
+
+            //finally draw 2 circles
+            ctx.beginPath();
+            ctx.arc(x+35, y+67, 16, 0, Math.PI * 2);
+            ctx.strokeStyle = 'black';
+            ctx.stroke();
+            ctx.closePath();      
+            ctx.beginPath();
+            ctx.arc(x+160, y+67, 16, 0, Math.PI * 2);
+            ctx.strokeStyle = 'black';
+            ctx.stroke();
+      
+        }
+        function animate(){
+            drawCar(x);
+            x += 2;
+
+            if(x > myCanvas.width){
+                x = -200;
+            }
+            animationId = requestAnimationFrame(animate);
+        }
+        animate();
+
+        startBtn.addEventListener('click', () =>{
+            if(!animationId){
+                animate();
+            }
+        });
+
+
+        stopBtn.addEventListener('click', () => {
+            if(animationId){
+                cancelAnimationFrame(animationId);
+                animationId = null;
+            }
+            
+        });
+        
+        
+    </script>
+</body>
+</html>

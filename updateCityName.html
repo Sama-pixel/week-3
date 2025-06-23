@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Edit the cities names</h2>
+    <ul id="city"></ul>
+    <button type="reset" id="reset">Reset</button>
+    <button id="solution">Solve</button>
+    
+
+<script>
+    const listCity = ['lonDon', 'pAleStINe', 'noRWay'];
+    const list = document.getElementById('city');
+    const reset = document.getElementById('reset');
+    const solution = document.getElementById('solution');
+
+
+    function updateCity(){
+        list.textContent = '';
+        for(const item of listCity){
+            const lower = item.toLowerCase();
+            const firstLetter = item.slice(0,1);
+            const capitalize = lower.replace(firstLetter, firstLetter.toUpperCase());
+            const result = capitalize;
+            const listItem = document.createElement("li");
+            listItem.textContent = result;
+            list.appendChild(listItem);
+        }
+    }
+
+    function display(){
+        list.textContent = '';
+        for(const city of listCity){
+            const item = document.createElement("li");
+            item.textContent = city;
+            list.appendChild(item);
+        }
+    }
+
+    reset.addEventListener("click", display);
+    solution.addEventListener("click", updateCity);
+
+    display();
+</script>
+</body>
+</html>

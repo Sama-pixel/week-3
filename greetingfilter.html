@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+        }
+        button{
+            padding: 7px;
+            margin:10px;
+            cursor: pointer;
+
+        }
+    </style>
+</head>
+<body>
+<h2>Greeting Filter</h2>
+<p>In this list there are many greeting messages, when you click on filter button only the messages contain "Christmas" will display</p>
+<br>
+<ul id="greetings"></ul>
+<button type="reset" id="reset">Click to reset</button>
+<button id="filter">Click to filter</button>
+
+<script>
+    const greetings = [
+        "Happy Birthday",
+        "Merry Christmas",
+        "A happy Christmas to all the family",
+        "You're all I want for Christmas",
+        "Get well soon"
+    ];
+    const greetingList = document.getElementById("greetings");
+    const reset = document.getElementById("reset");
+    const filter = document.getElementById("filter");
+
+    function displayMessages(){
+        greetingList.textContent = "";
+        for(const greet of greetings){ 
+            const li = document.createElement("li");
+            li.textContent = greet;
+             greetingList.appendChild(li);
+        }
+    }
+
+    function greetingFilter(){
+        greetingList.textContent = "";
+        for(const greet of greetings){
+            if(greet.includes("Christmas")){
+                const li = document.createElement("li");
+                li.textContent = greet;
+                greetingList.appendChild(li);
+            }
+        }
+    }
+
+    reset.addEventListener("click", displayMessages);
+    filter.addEventListener("click", greetingFilter);
+
+    displayMessages();
+</script>
+</body>
+</html>
